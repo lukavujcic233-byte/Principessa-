@@ -166,7 +166,7 @@ function cambiaFoto(dir, giorno) {
 }
 
 └── immagini/
-    ├── giorno01/ (1.jpg,2.jpg,3.jpg,4.jpg)
+    ├── giorno01/
     ├── giorno02/ (1.jpg,2.jpg,3.jpg,4.jpg)
     ├── giorno03/
     ├── giorno04/
