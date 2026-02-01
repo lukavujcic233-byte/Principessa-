@@ -1,0 +1,164 @@
+principessa/
+│ <!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Per la mia Principessa 👑</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Per la mia Principessa 👑</h1>
+  <p>Ogni giorno un piccolo ricordo per arrivare al 14 febbraio 💖</p>
+</header>
+
+<section class="calendario">
+  <!-- GENERA LE 14 CASELLE -->
+  <script>
+    for (let i = 1; i <= 14; i++) {
+      document.write(`<div class="casella" data-day="${i}" onclick="apriGiorno(${i})">${i}</div>`);
+    }
+  </script>
+</section>
+
+<!-- MODALI -->
+<script>
+  for (let i = 1; i <= 14; i++) {
+    document.write(`
+    <div id="giorno${i}" class="modale">
+      <div class="contenuto">
+        <span class="chiudi" onclick="chiudi()">×</span>
+        <h2>${i} Febbraio</h2>
+        <p class="frase">[SCRIVI QUI LA FRASE DEL ${i} FEBBRAIO]</p>
+
+        <div class="slider">
+          <button onclick="cambiaFoto(-1, ${i})">◀</button>
+          <img id="foto${i}" src="immagini/giorno${String(i).padStart(2,'0')}/1.jpg">
+          <button onclick="cambiaFoto(1, ${i})">▶</button>
+        </div>
+
+        ${i === 14 ? `
+        <div class="finale">
+          <h3>💌</h3>
+          <p>[QUI IL TUO MESSAGGIO FINALE]</p>
+        </div>` : ``}
+
+      </div>
+    </div>
+    `);
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+│ body {
+  font-family: 'Georgia', serif;
+  background: #fff7f9;
+  text-align: center;
+  margin: 0;
+  color: #333;
+}
+
+header {
+  padding: 40px 20px;
+}
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.casella {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.casella.bloccata {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.modale {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.contenuto {
+  background: white;
+  max-width: 520px;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 14px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.slider img {
+  width: 80%;
+  border-radius: 12px;
+}
+
+.chiudi {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.finale {
+  margin-top: 25px;
+  font-style: italic;
+}
+
+│ const oggi = new Date().getDate();
+const totaleFoto = 4;
+let indice = {};
+
+document.querySelectorAll('.casella').forEach(c => {
+  const giorno = parseInt(c.dataset.day);
+  if (giorno > oggi) c.classList.add('bloccata');
+});
+
+function apriGiorno(n) {
+  if (oggi >= n) {
+    indice[n] = 1;
+    document.getElementById('giorno' + n).style.display = 'block';
+  }
+}
+
+function chiudi() {
+  document.querySelectorAll('.modale').forEach(m => m.style.display = 'none');
+}
+
+function cambiaFoto(dir, giorno) {
+  indice[giorno] += dir;
+  if (indice[giorno] < 1) indice[giorno] = totaleFoto;
+  if (indice[giorno] > totaleFoto) indice[giorno] = 1;
+
+  document.getElementById('foto' + giorno).src =
+    `immagini/giorno${String(giorno).padStart(2,'0')}/${indice[giorno]}.jpg`;
+}
+
+│
+└── immagini/
+    ├── giorno01/ ()
+    ├── giorno02/
+    ├── giorno03/
+    ├── ...
+    └── giorno14/
