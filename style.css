@@ -1,0 +1,71 @@
+body {
+  font-family: 'Georgia', serif;
+  background: #fff7f9;
+  text-align: center;
+  margin: 0;
+  color: #333;
+}
+
+header {
+  padding: 40px 20px;
+}
+
+.calendario {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.casella {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.casella.bloccata {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.modale {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.contenuto {
+  background: white;
+  max-width: 520px;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 14px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.slider img {
+  width: 80%;
+  border-radius: 12px;
+}
+
+.chiudi {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.finale {
+  margin-top: 25px;
+  font-style: italic;
+}
